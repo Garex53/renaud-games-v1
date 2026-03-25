@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Renaud Games — Arcade</title><link rel="stylesheet" href="css/style.css"><script src="js/firebase-config.example.js"></script></head><body>
+<div class="stars"></div><div class="stars2"></div><div class="stars3"></div>
+<div class="container">
+  <section class="hero glass">
+    <div class="brand"><div class="logo"><img src="img/logo.png" alt="Renaud Games"></div><div><div class="small">Créateur : <span data-player-name>Renaud</span></div><h1>Renaud Games</h1></div></div>
+    <p class="subtitle">Une mini arcade créée par Renaud, avec mots croisés générés automatiquement, Snake, Zombie Survival, Memory et un système de classement prêt pour évoluer en ligne.</p>
+    <div class="hero-actions"><span class="badge">⚡ Version signée Renaud</span><span class="status-pill warn" data-backend-status>Classement local actif</span></div>
+    <div class="topbar"><a class="btn" href="crossword.html">🧠 Lancer les mots croisés</a><a class="btn secondary" href="leaderboard.html">🏆 Classement</a><button class="btn secondary" type="button" onclick="openProfileModal()">👤 Mon pseudo</button><button class="btn ghost" type="button" onclick="resetScores()">Réinitialiser mes scores</button></div>
+    <div class="stats"><div class="stat"><strong id="statCross">0</strong><span>Mots croisés réussis</span></div><div class="stat"><strong id="statSnake">0</strong><span>Meilleur Snake</span></div><div class="stat"><strong id="statZombie">0</strong><span>Meilleur Zombie</span></div><div class="stat"><strong id="statTotal">0</strong><span>Total points</span></div></div>
+  </section>
+
+  <section class="section glass">
+    <div class="section-head"><div><h2>Choisis ton mode</h2><p class="note">Le site tourne déjà entièrement. Le classement fonctionne en local et la structure est prête pour une évolution vers un système en ligne plus avancé.</p></div></div>
+    <div class="nav-grid">
+      <a class="nav-card" href="crossword.html"><div class="icon">🧠</div><h3>Mots croisés</h3><p>Générateur auto V3, vérification, indices, révélation de mot, progression et score.</p></a>
+      <a class="nav-card" href="snake.html"><div class="icon">🐍</div><h3>Snake</h3><p>Version arcade fluide avec vitesse progressive, traversée des bords et score sauvegardé.</p></a>
+      <a class="nav-card" href="zombie.html"><div class="icon">🧟</div><h3>Zombie Survival</h3><p>Déplacement clavier, tir souris, vagues, loot, santé et score persisté.</p></a>
+      <a class="nav-card" href="memory.html"><div class="icon">🃏</div><h3>Memory</h3><p>Petit bonus rapide, agréable à montrer, avec score final et sauvegarde.</p></a>
+      <a class="nav-card" href="leaderboard.html"><div class="icon">🏆</div><h3>Leaderboard</h3><p>Classement des joueurs, records et progression générale du site.</p></a>
+      <a class="nav-card" href="leaderboard.html"><div class="icon">📈</div><h3>Évolution du projet</h3><p>Base prête pour faire monter le site en gamme avec un vrai système de score et de suivi.</p></a>
+    </div>
+  </section>
+
+  
+
+  <div class="footer">Renaud Games — Arcade</div>
+</div>
+<div id="profileModal" class="modal-backdrop"><div class="modal glass"><div class="section-head"><div><h2>Ton pseudo joueur</h2><p class="note">Ce nom sera utilisé pour le classement.</p></div><button class="btn ghost" onclick="closeProfileModal()">Fermer</button></div><div class="form-grid"><input id="playerNameInput" class="input" maxlength="24" placeholder="Entre ton pseudo"><div class="row"><button class="btn" onclick="saveProfileFromModal()">Enregistrer</button></div></div></div></div>
+<script src="js/app.js"></script><script type="module" src="js/firebase-service.js"></script>
+</body></html>
