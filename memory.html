@@ -6,9 +6,7 @@
   <title>Renaud Games — Memory</title>
 
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/firebase-config.example.js"></script>
 </head>
-
 <body>
 
   <div class="stars"></div>
@@ -28,7 +26,9 @@
         </div>
       </div>
 
-      <p class="subtitle">Petit bonus rapide.</p>
+      <p class="subtitle">
+        Retourne les cartes, retrouve les paires et fais le meilleur score possible.
+      </p>
 
       <div class="page-links">
         <a class="btn" href="index.html">🏠 Accueil</a>
@@ -59,10 +59,16 @@
     </section>
 
     <section class="section glass">
-      <div class="grid2">
+      <div class="section-head">
+        <div>
+          <h2>🃏 Jeu Memory</h2>
+          <p class="note">Trouve toutes les paires le plus vite possible.</p>
+        </div>
+      </div>
 
+      <div class="grid2">
         <div class="panel">
-          <div id="memoryGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px"></div>
+          <div id="memoryGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;"></div>
         </div>
 
         <div class="panel">
@@ -71,14 +77,13 @@
             <div class="item"><strong>Paires :</strong> <span id="memoryPairs">0</span> / 8</div>
           </div>
 
-          <div class="game-actions" style="margin-top:14px">
+          <div class="game-actions" style="margin-top:14px;">
             <button class="btn" onclick="initMemory()">🔄 Rejouer</button>
             <button class="btn secondary" onclick="openProfileModal()">👤 Pseudo</button>
           </div>
 
-          <div id="memoryFeedback" class="feedback" style="margin-top:12px"></div>
+          <div id="memoryFeedback" class="feedback" style="margin-top:12px;"></div>
         </div>
-
       </div>
     </section>
 
@@ -88,7 +93,10 @@
   <div id="profileModal" class="modal-backdrop">
     <div class="modal glass">
       <div class="section-head">
-        <h2>Ton pseudo joueur</h2>
+        <div>
+          <h2>Ton pseudo joueur</h2>
+          <p class="note">Utilisé pour enregistrer tes scores.</p>
+        </div>
         <button class="btn ghost" onclick="closeProfileModal()">Fermer</button>
       </div>
 
