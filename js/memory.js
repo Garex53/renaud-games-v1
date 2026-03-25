@@ -1,27 +1,27 @@
-let memoryCards = [],
-    memoryOpened = [],
-    memoryMoves = 0,
-    memoryPairs = 0,
-    memoryLock = false;
+let memoryCards = [];
+let memoryOpened = [];
+let memoryMoves = 0;
+let memoryPairs = 0;
+let memoryLock = false;
 
-function initMemory(){
+// IMAGES (IMPORTANT)
+const images = [
+  "img/cards/card1.png",
+  "img/cards/card2.png",
+  "img/cards/card3.png",
+  "img/cards/card4.png",
+  "img/cards/card5.png",
+  "img/cards/card6.png",
+  "img/cards/card7.png",
+  "img/cards/card8.png"
+];
 
-  const images = [
-    "img/memory/1.png",
-    "img/memory/2.png",
-    "img/memory/3.png",
-    "img/memory/4.png",
-    "img/memory/5.png",
-    "img/memory/6.png",
-    "img/memory/7.png",
-    "img/memory/8.png"
-  ];
-
+function initMemory() {
   memoryCards = [...images, ...images]
     .sort(() => Math.random() - 0.5)
     .map((img, i) => ({
       id: i,
-      symbol: img,
+      img: img,
       open: false,
       done: false
     }));
@@ -34,67 +34,54 @@ function initMemory(){
   renderMemory();
 }
 
-function renderMemory(){
-  const grid = document.getElementById('memoryGrid');
-  if(!grid) return;
+function renderMemory() {
+  const grid = document.getElementById("memoryGrid");
+  if (!grid) return;
 
-  grid.innerHTML = '';
+  grid.innerHTML = "";
 
   memoryCards.forEach(card => {
+    const btn = document.createElement("button");
+    btn.className = "btn secondary";
+    btn.style.height = "110px";
 
-    const btn = document.createElement('button');
-    btn.className = 'btn secondary';
-    btn.style.height = '82px';
-    btn.style.borderRadius = '18px';
-    btn.style.padding = '0';
-    btn.style.overflow = 'hidden';
-
-    if(card.open || card.done){
-      btn.innerHTML = `<img src="${card.symbol}" class="memory-img">`;
+    if (card.open || card.done) {
+      btn.innerHTML = `<img src="${card.img}" class="memory-img">`;
     } else {
-      btn.textContent = '❔';
+      btn.innerHTML = "❔";
     }
 
     btn.onclick = () => openMemoryCard(card.id);
     grid.appendChild(btn);
   });
 
-  const moves = document.getElementById('memoryMoves');
-  const pairs = document.getElementById('memoryPairs');
-
-  if(moves) moves.textContent = memoryMoves;
-  if(pairs) pairs.textContent = memoryPairs;
+  document.getElementById("memoryMoves").textContent = memoryMoves;
+  document.getElementById("memoryPairs").textContent = memoryPairs;
 }
 
-async function openMemoryCard(id){
-
-  if(memoryLock) return;
+async function openMemoryCard(id) {
+  if (memoryLock) return;
 
   const card = memoryCards.find(c => c.id === id);
-  if(!card || card.done || card.open) return;
+  if (!card || card.done || card.open) return;
 
   card.open = true;
   memoryOpened.push(card);
-
   renderMemory();
 
-  if(memoryOpened.length === 2){
-
+  if (memoryOpened.length === 2) {
     memoryMoves++;
     memoryLock = true;
 
-    if(memoryOpened[0].symbol === memoryOpened[1].symbol){
-
+    if (memoryOpened[0].img === memoryOpened[1].img) {
       memoryOpened.forEach(c => c.done = true);
       memoryPairs++;
       memoryOpened = [];
       memoryLock = false;
 
-      beep(620, 0.06, 'triangle', 0.024);
       renderMemory();
 
-      if(memoryPairs === 8){
-
+      if (memoryPairs === 8) {
         const score = Math.max(20, 180 - (memoryMoves * 8));
 
         appState.scores.memoryBest = Math.max(appState.scores.memoryBest || 0, score);
@@ -103,30 +90,27 @@ async function openMemoryCard(id){
         saveScores();
 
         await submitScore({
-          game: 'memory',
+          game: "memory",
           score,
-          category: 'arcade',
-          difficulty: 'standard',
+          category: "arcade",
+          difficulty: "standard",
           size: 16,
-          title: 'Memory'
+          title: "Memory"
         });
 
-        const feedback = document.getElementById('memoryFeedback');
-        if(feedback){
-          feedback.innerHTML = `<span class="good">Partie terminée ! Score ${score}</span>`;
-        }
+        document.getElementById("memoryFeedback").innerHTML =
+          `<span class="good">Partie terminée ! Score ${score}</span>`;
       }
 
     } else {
-
       setTimeout(() => {
         memoryOpened.forEach(c => c.open = false);
         memoryOpened = [];
         memoryLock = false;
         renderMemory();
-      }, 650);
+      }, 700);
     }
   }
 }
 
-document.addEventListener('DOMContentLoaded', initMemory);
+document.addEventListener("DOMContentLoaded", initMemory);
