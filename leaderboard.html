@@ -1,1 +1,90 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Renaud Games — Classement</title><link rel="stylesheet" href="css/style.css"><script src="js/firebase-config.example.js"></script></head><body><div class="stars"></div><div class="stars2"></div><div class="stars3"></div><div class="container"><section class="hero glass"><div class="brand"><div class="logo"><img src="img/logo.png" alt="Renaud Games"></div><div><div class="small">Classement</div><h1>Classement</h1></div></div><p class="subtitle">Classement officiel Renaud Games. Les scores sont déjà enregistrés localement et la base du projet est prête pour évoluer vers une version encore plus poussée.</p><div class="page-links"><a class="btn" href="index.html">🏠 Accueil</a><a class="btn secondary" href="crossword.html">Mots croisés</a><a class="btn secondary" href="snake.html">Snake</a><a class="btn secondary" href="zombie.html">Zombie</a><a class="btn secondary" href="memory.html">Memory</a></div></section><section class="section glass"><div class="section-head"><div><h2>Classement</h2><p class="note" id="leaderboardStatus">Chargement...</p></div><div class="filters"><label class="tag">Jeu<select id="lbGame"><option value="crossword">Mots croisés</option><option value="snake">Snake</option><option value="zombie">Zombie</option><option value="memory">Memory</option></select></label></div></div><div class="table-wrap"><table><thead><tr><th>Rang</th><th>Joueur</th><th>Score</th><th>Catégorie</th><th>Difficulté</th></tr></thead><tbody id="leaderboardBody"></tbody></table></div></section><div class="footer">Renaud Games — Classement</div></div><script src="js/app.js"></script><script type="module" src="js/firebase-service.js"></script><script src="js/leaderboard.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renaud Games — Classement</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/firebase-config.example.js"></script>
+</head>
+
+<body>
+
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <div class="container">
+
+    <section class="hero glass">
+      <div class="brand">
+        <div class="logo">
+          <img src="img/logo.png" alt="Renaud Games">
+        </div>
+        <div>
+          <div class="small">Classement</div>
+          <h1>Classement</h1>
+        </div>
+      </div>
+
+      <p class="subtitle">
+        Classement officiel Renaud Games. Les scores sont déjà enregistrés localement et la base du projet est prête pour évoluer vers une version encore plus poussée.
+      </p>
+
+      <div class="page-links">
+        <a class="btn" href="index.html">🏠 Accueil</a>
+        <a class="btn secondary" href="crossword.html">Mots croisés</a>
+        <a class="btn secondary" href="snake.html">Snake</a>
+        <a class="btn secondary" href="zombie.html">Zombie</a>
+        <a class="btn secondary" href="memory.html">Memory</a>
+      </div>
+    </section>
+
+    <section class="section glass">
+
+      <div class="section-head">
+        <div>
+          <h2>Classement</h2>
+          <p class="note" id="leaderboardStatus">Chargement...</p>
+        </div>
+
+        <div class="filters">
+          <label class="tag">
+            Jeu
+            <select id="lbGame">
+              <option value="crossword">Mots croisés</option>
+              <option value="snake">Snake</option>
+              <option value="zombie">Zombie</option>
+              <option value="memory">Memory</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rang</th>
+              <th>Joueur</th>
+              <th>Score</th>
+              <th>Catégorie</th>
+              <th>Difficulté</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <div class="footer">Renaud Games — Classement</div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script type="module" src="js/firebase-service.js"></script>
+  <script src="js/leaderboard.js"></script>
+
+</body>
+</html>
