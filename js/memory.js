@@ -4,16 +4,15 @@ let memoryMoves = 0;
 let memoryPairs = 0;
 let memoryLock = false;
 
-// IMAGES (IMPORTANT)
 const images = [
-  "img/cards/card1.png",
-  "img/cards/card2.png",
-  "img/cards/card3.png",
-  "img/cards/card4.png",
-  "img/cards/card5.png",
-  "img/cards/card6.png",
-  "img/cards/card7.png",
-  "img/cards/card8.png"
+  "img/cards/card_1.png",
+  "img/cards/card_2.png",
+  "img/cards/card_3.png",
+  "img/cards/card_4.png",
+  "img/cards/card_5.png",
+  "img/cards/card_6.png",
+  "img/cards/card_7.png",
+  "img/cards/card_8.png"
 ];
 
 function initMemory() {
@@ -44,9 +43,11 @@ function renderMemory() {
     const btn = document.createElement("button");
     btn.className = "btn secondary";
     btn.style.height = "110px";
+    btn.style.padding = "0";
+    btn.style.overflow = "hidden";
 
     if (card.open || card.done) {
-      btn.innerHTML = `<img src="${card.img}" class="memory-img">`;
+      btn.innerHTML = `<img src="${card.img}" alt="carte" class="memory-img">`;
     } else {
       btn.innerHTML = "❔";
     }
@@ -55,8 +56,11 @@ function renderMemory() {
     grid.appendChild(btn);
   });
 
-  document.getElementById("memoryMoves").textContent = memoryMoves;
-  document.getElementById("memoryPairs").textContent = memoryPairs;
+  const moves = document.getElementById("memoryMoves");
+  const pairs = document.getElementById("memoryPairs");
+
+  if (moves) moves.textContent = memoryMoves;
+  if (pairs) pairs.textContent = memoryPairs;
 }
 
 async function openMemoryCard(id) {
@@ -84,24 +88,28 @@ async function openMemoryCard(id) {
       if (memoryPairs === 8) {
         const score = Math.max(20, 180 - (memoryMoves * 8));
 
-        appState.scores.memoryBest = Math.max(appState.scores.memoryBest || 0, score);
-        appState.scores.total += 5;
+        if (window.appState?.scores) {
+          appState.scores.memoryBest = Math.max(appState.scores.memoryBest || 0, score);
+          appState.scores.total += 5;
+          if (typeof saveScores === "function") saveScores();
+        }
 
-        saveScores();
+        if (typeof submitScore === "function") {
+          await submitScore({
+            game: "memory",
+            score,
+            category: "arcade",
+            difficulty: "standard",
+            size: 16,
+            title: "Memory"
+          });
+        }
 
-        await submitScore({
-          game: "memory",
-          score,
-          category: "arcade",
-          difficulty: "standard",
-          size: 16,
-          title: "Memory"
-        });
-
-        document.getElementById("memoryFeedback").innerHTML =
-          `<span class="good">Partie terminée ! Score ${score}</span>`;
+        const feedback = document.getElementById("memoryFeedback");
+        if (feedback) {
+          feedback.innerHTML = `<span class="good">Partie terminée ! Score ${score}</span>`;
+        }
       }
-
     } else {
       setTimeout(() => {
         memoryOpened.forEach(c => c.open = false);
